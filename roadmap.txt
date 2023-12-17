@@ -1,0 +1,15 @@
+1. npm init
+untuk membuat inisialisasi nama packagenya dan beberapa kebutuhan
+2. npm install express
+untuk melakukan instal node_modulesnya
+3. npm add expres nodemon 
+untuk menambahkan nodemon didalam package.json
+4. membuat server 
+dibagian index.js membuat port yang akan digunakan
+5. menambahkan bagian script untuk melakukan start pada port yang susdah dibuat
+npm start
+6. refactoring structure folder
+    a. routers( berguna untuk tempat mengumpulkan semua file yang berisikan tentang ruting)
+    b. controller(berguna untuk tempat mengumpulkan semua file yang berisikan tentang controller antara model dan controlelr )
+    c. models(bertujuan untuk mengumpulkan semua file yang menjembatani antara database dan model)
+    d. config(bertujuan untuk tempat setup/configurasi ke-database)
