@@ -15,3 +15,8 @@ npm start
     d. config(bertujuan untuk tempat setup/configurasi ke-database)
     e. .env(bertujuan menjaga kerahasian informasi penting seperti nama database dll) -> npm i dotenv
     f. install multer (bertujuan dapat melakukan post image/file) -> npm i multer
+7. setting prima(ORM)
+    a. npm install prisma --save-dev
+    b. npx prisma init --datasource-provider mysql -> setting DATABASE_URL
+    c  npx prisma db pull -> melakukan write model berdasarkan dengan table yang sudah ada didatabase
+    d. npx prisma generate -> melakukan generate untuk digunakan didalam app.js/main.js

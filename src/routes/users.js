@@ -16,4 +16,5 @@ router.post('/', (req, res)=> {
         message: "Post Data User"
     })
 })
+
 module.exports = router;
