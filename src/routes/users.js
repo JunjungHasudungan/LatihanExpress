@@ -4,8 +4,9 @@ const userController = require('../controller/userController')
 
 // router untuk mengambil semua data user
 router.get('/', userController.getaAllUser) // mengambil seluruh list data user menggunakan userController
+router.get('/:idUser', userController.showDataUser);
 router.post('/', userController.createNewUser); // route untuk membuat user baru
-router.patch('/:idUser', userController.updateUser); // method path meng-update sebagian dari data
+router.patch('/:idUser', userController.updateUser); // method patch meng-update sebagian dari data user
 router.get('/', userController.showDataUser);
 router.delete('/:idUser', userController.deleteUser)
 

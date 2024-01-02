@@ -14,3 +14,4 @@ npm start
     c. models(bertujuan untuk mengumpulkan semua file yang menjembatani antara database dan model)
     d. config(bertujuan untuk tempat setup/configurasi ke-database)
     e. .env(bertujuan menjaga kerahasian informasi penting seperti nama database dll) -> npm i dotenv
+    f. install multer (bertujuan dapat melakukan post image/file) -> npm i multer

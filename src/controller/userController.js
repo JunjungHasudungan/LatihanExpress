@@ -17,37 +17,91 @@ const getaAllUser = async(req, res) => {
 }
 
 // fungsi untuk membuat user baru
-const createNewUser = (req, res)=> {
-    res.json({
-        message: "Create New data user",
-        data: req.body
-    })
+const createNewUser = async (req, res)=> {
+    const { body } = req;
+
+    // melakukan validasi inputan pada setiap body
+    if(!body.name || !body.address || !body.email) {
+        res.status(400).json({
+            message: "uncompleted data send..",
+            data: null
+        });
+    }
+
+    try {
+        // inisalisasi model User
+        await UserModel.createNewUser(body)
+        res.status(201).json({
+            message: "Create New user Successfully..",
+            data: req.body
+        })
+        
+    } catch (error) {
+        res.status(500).json({
+            message: "Failed Created User",
+            serverMesage: error
+        })
+    }
 }
 
-const updateUser = (req, res) => {
+const updateUser = async(req, res) => {
     // console.log(req.params); // mengecek request parameter yang ada dari route dan endpoint
     const { idUser } = req.params // menggunakan {} menkonversikan menjadi objek
-    res.json({
-        message: "Update User",
-        data: req.body
-    })
+    const { body } = req;
+
+    try {
+        await UserModel.updateUser(body, idUser)
+
+        res.json({
+            message: "Updated User Successfully..",
+            data: {
+                id: idUser,
+                ...body // menggunakan ... / spread agar menampilkan semua isi dari object body
+            }
+        })
+        
+    } catch (error) {
+        res.status(500).json({
+            message: "Updated User Failed",
+            serverMesage: error
+        })
+    }
 }
 
-const showDataUser = (req, res)=> {
-    res.json({
-        message: "Show data user"
-    })
+const showDataUser = async(req, res)=> {
+    const {idUser} = req.params;
+    console.log(`idUser: ${idUser}`)
+    try {
+        await UserModel.showDataUser(idUser);
+        res.json({
+            message: "Show data user Successfully.."
+        })
+        
+    } catch (error) {
+        res.status(500).json({
+            message: "Show data user Failed..",
+            serverMesage: error
+        });
+    }
 }
 
-const deleteUser = (req, res)=> {
+const deleteUser = async(req, res)=> {
     const { idUser } = req.params;
+    
+    try {
+        await UserModel.deleteUser(idUser);
+        res.json({
+            message: "Delete User Successfully..",
+            data: null
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: "Deleted User Failed..",
+            serverMesage: error
+        });
+    }
 
-    res.json({
-        message: "Delete User",
-        data: {
-            idUser: idUser
-        }
-    })
+
 }
 
 // melakukan export semua fungsi yang ada didalam file userController
