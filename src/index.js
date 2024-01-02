@@ -1,21 +1,34 @@
+require('dotenv').config()
+
 const express = require('express')
+const PORT = process.env.PORT || 5000;
 const userRoute = require('./routes/users.js')
+const middlewareLogRequest = require('./middleware/log');
 const app = express()
 
-// membuat variable router untuk user
+// membuat middleware
+app.use(middlewareLogRequest)
+app.use(express.json()) // middleware mengizinkan untuk mengakses request body dari jason
 
-// menggunakan route user yang telah dibuta
-app.use('/', userRoute)
-// membuat routing 
-app.get('/', (req, res)=> {
-    res.json({
-        name: "Hasudungan",
-        age: 30,
-        address: "Bandung-barat"
-    })
+// menggunakan route user yang telah dibuat
+app.use('/user', userRoute)
+
+// melakukan eksekusi dbPoll
+app.use('/', (req, res)=> {
+    dbPool.execute('SELECT * FROM users', (err, row)=> {
+        if (err) {
+            res.json({
+                message: "Connection Failed"
+            })
+        }
+        res.json({
+            message: "Connection Successfully",
+            data: row
+        });
+    });
 })
 
 // membuat port
-app.listen(4000, ()=> {
-    console.log('server berhasil dibuat diport 4000')
+app.listen(PORT, ()=> {
+    console.log(`server berhasil dibuat diport ${PORT}`)
 })

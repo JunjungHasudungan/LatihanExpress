@@ -13,3 +13,4 @@ npm start
     b. controller(berguna untuk tempat mengumpulkan semua file yang berisikan tentang controller antara model dan controlelr )
     c. models(bertujuan untuk mengumpulkan semua file yang menjembatani antara database dan model)
     d. config(bertujuan untuk tempat setup/configurasi ke-database)
+    e. .env(bertujuan menjaga kerahasian informasi penting seperti nama database dll) -> npm i dotenv
